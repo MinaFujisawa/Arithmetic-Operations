@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.learnlistview.MainActivity">
+    tools:context="com.example.arithmeticoperations.MainActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_marginBottom="80dp">
 
         <TextView
-            android:id="@+id/LHS_left"
+            android:id="@+id/num_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
@@ -29,7 +29,7 @@
             android:background="@drawable/rectangle" />
 
         <TextView
-            android:id="@+id/LHS_right"
+            android:id="@+id/num_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
@@ -44,7 +44,7 @@
             android:textSize="50sp" />
 
         <TextView
-            android:id="@+id/RHS"
+            android:id="@+id/num_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
@@ -56,13 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/sum"
+            android:id="@+id/addition"
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:textSize="46sp"
             android:text="+"/>
         <Button
-            android:id="@+id/difference"
+            android:id="@+id/subtraction"
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:textSize="46sp"
@@ -73,13 +73,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/product"
+            android:id="@+id/times"
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:textSize="46sp"
             android:text="×"/>
         <Button
-            android:id="@+id/quotient"
+            android:id="@+id/division"
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:textSize="46sp"
