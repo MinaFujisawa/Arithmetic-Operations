@@ -82,4 +82,7 @@ public class FormulaLab {
         }
     }
 
+    public Formula[] getmFormulaList() {
+        return mFormulaList;
+    }
 }
