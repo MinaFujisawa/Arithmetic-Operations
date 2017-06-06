@@ -71,8 +71,8 @@ public class FormulaLab {
             case "division":
                 do {
                     left = random.nextInt(30) + 1;
-                    right = random.nextInt(9) + 1;
-                } while (left < right);
+                    right = random.nextInt(9) + 2;
+                } while (left < right || left % right != 0);
 
                 formula.setmNum_left(left);
                 formula.setmNum_right(right);

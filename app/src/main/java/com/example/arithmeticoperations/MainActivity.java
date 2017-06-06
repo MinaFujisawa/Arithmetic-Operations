@@ -1,8 +1,10 @@
 package com.example.arithmeticoperations;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int index = 0;
     private int mPoint = 0;
     Dialog settingsDialog;
+    private ImageView mDialogImageView;
 
 
     @Override
@@ -47,11 +50,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         settingsDialog = new Dialog(this, R.style.TransparentDialogTheme);
 
+        settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        settingsDialog.setContentView(getLayoutInflater().inflate(R.layout.my_dialog
+                , null));
+        mDialogImageView = (ImageView) settingsDialog.findViewById(R.id.dialogIcon);
+
         loadActivity();
     }
 
 
     private void loadActivity() {
+
+        settingsDialog.dismiss();
+
         if (index < mFormulaList.length) {
             mNum_left = (TextView) findViewById(R.id.num_left);
             mNum_left.setText(String.valueOf(mFormulaList[index].getmNum_left()));
@@ -62,58 +73,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mNum_answer = (TextView) findViewById(R.id.num_answer);
             mNum_answer.setText(String.valueOf(mFormulaList[index].getmNum_answer()));
         }
+
     }
 
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.addition:
-                if (mFormulaList[index].getmOperation().equals("addition")) {
-                    showImage(true);
-                    mPoint++;
-                } else {
-                    showImage(false);
-                }
-                index++;
-                loadActivity();
-                break;
-
-            case R.id.subtraction:
-                if (mFormulaList[index].getmOperation().equals("subtraction")) {
-                    showImage(true);
-                    mPoint++;
-                } else {
-                    showImage(false);
-                }
-                index++;
-                loadActivity();
-                break;
-
-            case R.id.times:
-                if (mFormulaList[index].getmOperation().equals("times")) {
-                    showImage(true);
-                    mPoint++;
-                } else {
-                    showImage(false);
-                }
-                index++;
-                loadActivity();
-                break;
-
-            case R.id.division:
-                if (mFormulaList[index].getmOperation().equals("division")) {
-                    showImage(true);
-                    mPoint++;
-                } else {
-                    showImage(false);
-                }
-                index++;
-                loadActivity();
-                break;
-
-            default:
-                break;
+    private void check(String operator) {
+        if (mFormulaList[index].getmOperation().equals(operator)) {
+            showImage(true);
+            mPoint++;
+        } else {
+            showImage(false);
         }
+        index++;
+        new CountDownTimer(2000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                loadActivity();
+            }
+        }.start();
     }
 
 
@@ -121,17 +99,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         settingsDialog.getWindow().setBackgroundDrawable(
                 new ColorDrawable(Color.TRANSPARENT));
-
-        settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        settingsDialog.setContentView(getLayoutInflater().inflate(R.layout.my_dialog
-                , null));
-        ImageView imageView = (ImageView) settingsDialog.findViewById(R.id.dialogIcon);
         if (isCorrect) {
-            imageView.setImageResource(R.drawable.correct);
+            mDialogImageView.setImageResource(R.drawable.correct);
         } else {
-            imageView.setImageResource(R.drawable.incorrect);
+            mDialogImageView.setImageResource(R.drawable.incorrect);
         }
         settingsDialog.show();
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.addition:
+                check("addition");
+                break;
+
+            case R.id.subtraction:
+                check("subtraction");
+                break;
+
+            case R.id.times:
+                check("times");
+                break;
+
+            case R.id.division:
+                check("division");
+                break;
+
+            default:
+                break;
+        }
     }
 
 
